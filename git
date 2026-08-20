@@ -1,0 +1,19 @@
+📌 3️⃣ Make your first commit
+
+git add .
+
+git commit -m "✨ Initial commit of MyHeartHub structure"
+
+git remote add origin https://github.com/YOURUSERNAME/myhearthub.git
+
+git branch -M main
+
+git push -u origin main
+
+
+Run git add . and git commit -m "your message" to save progress.
+
+Push to GitHub often to keep an online backup.
+
+
+

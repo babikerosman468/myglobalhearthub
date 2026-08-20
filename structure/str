@@ -1,0 +1,230 @@
+✅ 📂 Project Structure
+
+/myglobalhearthub
+ ├─ server.js
+ ├─ views/
+ │   ├─ index.ejs
+ │   ├─ about.ejs
+ │   ├─ pledge.ejs
+ │   ├─ practice.ejs
+ │   ├─ thankyou.ejs
+ ├─ public/
+ │   ├─ style.css
+ ├─ .env
+ ├─ package.json
+
+
+---
+
+✅ 1️⃣ server.js
+
+const express = require('express');
+const mysql = require('mysql2');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+
+const app = express();
+const port = 3000;
+
+// DB connection
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+});
+
+// Middleware
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Routes
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
+app.get('/pledge', (req, res) => {
+  res.render('pledge');
+});
+
+app.get('/practice', (req, res) => {
+  res.render('practice');
+});
+
+// Handle signup
+app.post('/signup', (req, res) => {
+  const { name, email, country } = req.body;
+  const sql = 'INSERT INTO members (name, email, country, date_joined) VALUES (?, ?, ?, NOW())';
+  db.execute(sql, [name, email, country], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.send('Database error.');
+    }
+    res.redirect('/thankyou');
+  });
+});
+
+app.get('/thankyou', (req, res) => {
+  res.render('thankyou');
+});
+
+// Start
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
+
+
+---
+
+✅ 2️⃣ .env
+
+DB_HOST=localhost
+DB_USER=your_db_user
+DB_PASS=your_db_password
+DB_NAME=your_db_name
+
+
+---
+
+✅ 3️⃣ views/index.ejs
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Global Heart Hub</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Welcome to My Global Heart Hub</h1>
+  <p>Where the science of the heart meets the spirit of unity.</p>
+  <a href="/about">About</a> | <a href="/pledge">Pledge</a> | <a href="/practice">Practice</a>
+
+  <h2>Join Us</h2>
+  <form action="/signup" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="text" name="country" placeholder="Your Country" required>
+    <button type="submit">Join Now</button>
+  </form>
+</body>
+</html>
+
+
+---
+
+✅ 4️⃣ views/about.ejs
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>About - My Global Heart Hub</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>About Us</h1>
+  <p>The heart is more than a pump... [your about.txt content here]</p>
+  <a href="/">Back Home</a>
+</body>
+</html>
+
+(Same for pledge.ejs, practice.ejs, thankyou.ejs — each uses your .txt content!)
+
+
+---
+
+✅ 5️⃣ views/thankyou.ejs
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thank You</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Thank You!</h1>
+  <p>You are now part of the Global Heart Field.</p>
+  <a href="/">Back to Home</a>
+</body>
+</html>
+
+
+---
+
+✅ 6️⃣ Example style.css
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  color: #333;
+}
+h1 {
+  color: #c0392b;
+}
+form input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+}
+button {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+}
+
+
+---
+
+✅ 7️⃣ package.json
+
+{
+  "name": "myglobalhearthub",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "mysql2": "^3.3.3",
+    "body-parser": "^1.20.2"
+  }
+}
+
+
+---
+
+✅ 8️⃣ DB Table
+
+Run in MariaDB:
+
+CREATE TABLE members (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(255) UNIQUE,
+  country VARCHAR(100),
+  date_joined DATETIME,
+  pledge BOOLEAN DEFAULT FALSE
+);
+
+
+---
+
+📌 Run it!
+
+npm install
+node server.js
+
+Open: http://localhost:3000 🚀
+
+
+
+
+

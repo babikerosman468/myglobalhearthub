@@ -1,0 +1,133 @@
+# My Global Heart Hub - Homepage
+
+Welcome to My Global Heart Hub  
+Where the science of the heart meets the spirit of unity.
+
+Your heart is more than a muscle — it’s a source of wisdom, a powerful electromagnetic field that connects you to your mind, your emotions, and to other hearts around the world.
+
+At My Global Heart Hub, we gather clean hearts to amplify this coherent field — one heartbeat at a time. Together, we move from head to heart, and from separation to unity.
+
+[INSERT IMAGE: Artistic heart with electromagnetic field lines]
+
+## Join Us
+
+- Sign up and place your heart on the map.
+- Practice heart coherence together.
+- Share your story.
+- Spread the field.
+
+Be the Signal. Be the Field.
+
+[JOIN NOW BUTTON]
+
+
+📄 about.txt
+
+# About Us
+
+## The Heart is More Than a Pump
+
+For centuries, spiritual traditions spoke of the heart as the seat of the soul, intuition, and divine connection.
+
+Modern science confirms this wisdom:
+- The heart generates the strongest rhythmic electromagnetic field in the body.
+- This field synchronizes brainwaves, calms the nervous system, aligns emotions.
+- Heart coherence practice boosts clarity, resilience, compassion.
+- Groups practicing coherence create a collective field — a shared heart resonance.
+
+[INSERT IMAGE: Heart field diagram or science infographic]
+
+We bridge spiritual science with community action. We are clean hearts coming together to unify the living field.
+
+
+
+📄 pledge.txt
+
+# Our Community Pledge
+
+When you join My Global Heart Hub, you join a living promise:
+
+- I commit to cleaning my own heart daily — through coherence, compassion, forgiveness.
+- I choose to listen deeply to my heart’s wisdom.
+- I connect openly with others in the field, amplifying unity.
+- I stand as a living signal of peace, clarity, love.
+
+[INSERT IMAGE: Circle of people meditating or holding hands in a heart shape]
+
+
+
+📄 practice.txt
+
+# Guided Heart Coherence Practice
+
+## 1. Breathe
+
+Bring your attention to your heart. Take slow breaths — in for 5 seconds, out for 5 seconds.
+
+## 2. Feel
+
+Imagine breathing in and out through your heart. Bring up a feeling of appreciation — someone you love, a beautiful moment, gratitude.
+
+## 3. Connect
+
+Hold this feeling. Know your heart’s field expands and joins with the field of others practicing now.
+
+Stay here 3–5 minutes. Return anytime. You are never alone in this field.
+
+[INSERT IMAGE: Simple diagram of heart breathing]
+
+
+---
+
+📄 newsletter_template.txt
+
+# My Global Heart Hub - Newsletter Template
+
+Subject: Stay Connected in the Heart Field 💗
+
+Hello [Name],
+
+Thank you for being part of My Global Heart Hub!
+
+Here’s what’s new in our global field:
+- Upcoming coherence practice sessions
+- Stories from community members
+- New heart science insights
+
+💡 Tip of the Week: Take 3 minutes daily to move from head to heart.
+
+Stay connected, stay coherent.
+
+[JOIN NEXT SESSION BUTTON]
+
+With heart,
+The My Global Heart Hub Team
+
+
+📄 members_schema.json
+
+{
+  "table": "members",
+  "columns": [
+    { "name": "id", "type": "INT", "primary_key": true, "auto_increment": true },
+    { "name": "name", "type": "VARCHAR(100)" },
+    { "name": "email", "type": "VARCHAR(255)", "unique": true },
+    { "name": "country", "type": "VARCHAR(100)" },
+    { "name": "date_joined", "type": "DATETIME" },
+    { "name": "pledge", "type": "BOOLEAN", "default": false }
+  ]
+}
+
+Usage: Use this JSON to guide your MariaDB table creation:
+
+CREATE TABLE members (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(255) UNIQUE,
+  country VARCHAR(100),
+  date_joined DATETIME,
+  pledge BOOLEAN DEFAULT FALSE
+);
+
+
+

@@ -1,0 +1,42 @@
+✅ 1️⃣ Make your fresh updated ZIP
+
+In ~/myhearthub, run:
+
+zip -r myglobalhearthub.zip . -x "*.zip" "*.log" "*.pid" "node_modules/*"
+
+This will create a new myglobalhearthub.zip with:
+
+All your updated files
+
+Excluding .zip, logs, PIDs, and node_modules
+
+
+
+---
+
+✅ 2️⃣ Confirm it’s there
+
+ls -lh myglobalhearthub.zip
+
+
+---
+
+✅ 3️⃣ Deploy
+
+./deploy.sh
+
+
+---
+
+⚡ That’s it!
+
+Your new version goes live — Node + MariaDB restart automatically.
+If you like, I can also make a backup.sh so you always keep a copy before deploying.
+
+
+---
+
+📌 Do you want that backup.sh too?
+Say: “Yes backup!” and I’ll prepare it!
+
+
