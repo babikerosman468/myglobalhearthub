@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pledge - My Global Heart Hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join - My Global Heart Hub</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Our Pledge</h1>
-  <p>[Your pledge.txt content here]</p>
-  <a href="/">Back Home</a>
+
+  <h1>Join MyGlobalHeartHub</h1>
+
+  <p>
+    Join the Global Heart Field.
+  </p>
+
+  <form method="POST" action="/pledge">
+
+    <label for="name">Name</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="country">Country</label><br>
+    <input type="text" id="country" name="country" required><br><br>
+
+    <button type="submit">Make a Pledge</button>
+
+  </form>
+
+  <p><a href="/">Back Home</a></p>
+
 </body>
 </html>

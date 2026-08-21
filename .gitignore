@@ -1,3 +1,7 @@
+# Local documentation and development backups
+0                        doc.pdf                  doc.tex
+manage.sh.backup
+it/*.tar.gz
 
 # Node logs
 *.log
@@ -21,3 +25,7 @@ node_modules/
 .env.local
 .vercel
 .env*
+
+0
+doc.pdf
+doc.tex
