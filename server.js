@@ -2,24 +2,35 @@ require('dotenv').config();
 
 const express = require('express');
 const mysql = require('mysql2');
+const { neon } = require('@neondatabase/serverless');
 
 const app = express();
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS || '',
-  database: process.env.DB_NAME
-});
+const isProduction = !!process.env.VERCEL;
 
-db.connect(err => {
-  if (err) {
-    console.error('Database connection failed:', err.message);
-    return;
-  }
+let db;
+let sql;
 
-  console.log('Database connected!');
-});
+if (isProduction) {
+  sql = neon(process.env.DATABASE_URL);
+  console.log('Database: Neon PostgreSQL');
+} else {
+  db = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS || '',
+    database: process.env.DB_NAME
+  });
+
+  db.connect(err => {
+    if (err) {
+      console.error('Database connection failed:', err.message);
+      return;
+    }
+
+    console.log('Database: local MariaDB');
+  });
+}
 
 app.set('view engine', 'ejs');
 
@@ -42,22 +53,38 @@ app.get('/practice', (req, res) => {
   res.render('practice');
 });
 
-app.post('/pledge', (req, res) => {
+app.post('/pledge', async (req, res) => {
   const { name, email, country } = req.body;
 
   if (!name || !email || !country) {
     return res.status(400).send('Name, email and country are required.');
   }
 
-  const sql = `
+  if (isProduction) {
+    try {
+      await sql`
+        INSERT INTO members
+          (name, email, country, date_joined)
+        VALUES
+          (${name}, ${email}, ${country}, CURRENT_TIMESTAMP)
+      `;
+
+      return res.redirect('/thankyou');
+    } catch (err) {
+      console.error('Neon database insert failed:', err.message);
+      return res.status(500).send('Unable to process your pledge.');
+    }
+  }
+
+  const mysqlSql = `
     INSERT INTO members
       (name, email, country, date_joined)
     VALUES (?, ?, ?, NOW())
   `;
 
-  db.execute(sql, [name, email, country], err => {
+  db.execute(mysqlSql, [name, email, country], err => {
     if (err) {
-      console.error('Database insert failed:', err.message);
+      console.error('MariaDB insert failed:', err.message);
       return res.status(500).send('Unable to process your pledge.');
     }
 
