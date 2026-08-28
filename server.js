@@ -53,6 +53,10 @@ app.get('/practice', (req, res) => {
   res.render('practice');
 });
 
+app.get('/heartmath', (req, res) => {
+  res.render('heartmath');
+});
+
 app.post('/pledge', async (req, res) => {
   const { name, email, country } = req.body;
 
