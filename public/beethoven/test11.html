@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Beethoven 9 – 3-Phase Orchestra Live Glow with Heart</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(-45deg, #001f3f, #003366, #0055aa, #0077cc);
+    background-size: 400% 400%;
+    color: white;
+    animation: gradientBG 20s ease infinite;
+}
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+h1{ color:#00ffff; text-shadow:0 0 20px #00ffff; }
+h3{ color:#a0e0ff; text-shadow:0 0 10px #a0e0ff; }
+
+#bar{
+    width: 80%; height: 30px; margin:auto; position:relative; background:#004080; border-radius:8px; overflow:hidden;
+}
+.seg{
+    height:100%; position:absolute; top:0; display:flex; align-items:center; justify-content:center; font-size:14px; border-right:1px solid #003366; color:black;
+}
+.code{ left:0%; width:33%; background:#00bfff; }
+.coherence{ left:33%; width:33%; background:#1ec6ff; }
+.conscious{ left:66%; width:34%; background:#40e0d0; }
+
+#progress{
+    position:absolute; top:0; left:0; width:8px; height:100%; background:#ffff00;
+    box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00, 0 0 60px #ffff00;
+    transition:left 0.1s linear;
+}
+
+button{
+    padding:12px 25px; margin:10px; font-size:16px; cursor:pointer;
+    border:none; border-radius:6px; background: linear-gradient(to right, #0055aa, #0088ff);
+    color:white; transition: all 0.3s ease;
+}
+button:hover{
+    background: linear-gradient(to right, #00ffff, #00aaff);
+    color:black; transform: scale(1.1);
+}
+
+#stage{
+    width:600px; height:350px; margin:30px auto; position:relative; background:#003366; border-radius:12px;
+    box-shadow:0 0 30px #000; overflow:hidden;
+}
+.section{
+    position:absolute; padding:12px; border-radius:10px; background:#004080; color:white; text-shadow:0 0 5px #000;
+    transition: all 0.3s ease;
+}
+.active{
+    transform: translateY(-8px) scale(1.08);
+    animation: pulseGlow 1s infinite;
+}
+
+#strings{left:200px;top:220px; background:#004080;}
+#woodwinds{left:250px;top:150px; background:#004080;}
+#brass{left:120px;top:120px; background:#004080;}
+#percussion{left:400px;top:120px; background:#004080;}
+#choir{left:250px;top:40px; background:#004080;}
+
+@keyframes pulseGlow{
+    0%{transform: translateY(-8px) scale(1); box-shadow:0 0 30px currentColor,0 0 60px currentColor;}
+    50%{transform: translateY(-12px) scale(1.1); box-shadow:0 0 60px currentColor,0 0 120px currentColor;}
+    100%{transform: translateY(-8px) scale(1); box-shadow:0 0 30px currentColor,0 0 60px currentColor;}
+}
+
+/* Heartbeat + ECG */
+#heartbeat-container{
+    margin-top:20px;
+    position:relative;
+    width:600px;
+    height:100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#heart{
+    width:50px;
+    height:50px;
+    background:red;
+    margin:auto;
+    margin-top:-70px;
+    clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 85% 25%, 85% 40%, 75% 55%, 50% 70%, 25% 55%, 15% 40%, 15% 25%, 25% 15%, 39% 15%);
+    animation: pulseHeart 1s infinite alternate;
+}
+@keyframes pulseHeart{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.3); }
+    100%{ transform: scale(1); }
+}
+canvas{
+    border-radius:10px;
+    background:#003366;
+}
+</style>
+</head>
+<body>
+
+<h1>Beethoven Symphony No.9</h1>
+<h3>3-Phase Dashboard with Orchestra Glow & Heart</h3>
+
+<audio id="audio" controls>
+    <source src="audio/45.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+</audio>
+
+<div id="bar">
+    <div class="seg code">Code</div>
+    <div class="seg coherence">Coherence</div>
+    <div class="seg conscious">Conscious Collaborative Communication</div>
+    <div id="progress"></div>
+</div>
+
+<br>
+<button onclick="jump(0)">Code</button>
+<button onclick="jump(90)">Coherence</button>
+<button onclick="jump(180)">Conscious Collaboration</button>
+<br>
+<button onclick="play()">Play</button>
+<button onclick="pause()">Pause</button>
+<button onclick="restart()">Restart</button>
+
+<div id="stage">
+    <div id="strings" class="section">Strings</div>
+    <div id="woodwinds" class="section">Woodwinds</div>
+    <div id="brass" class="section">Brass</div>
+    <div id="percussion" class="section">Percussion</div>
+    <div id="choir" class="section">Choir</div>
+</div>
+
+<!-- Heartbeat + ECG -->
+<div id="heartbeat-container">
+    <canvas id="ecg" width="600" height="100"></canvas>
+    <div id="heart"></div>
+</div>
+
+<script>
+let audio=document.getElementById("audio");
+let progress=document.getElementById("progress");
+let sections=[document.getElementById("strings"), document.getElementById("woodwinds"), document.getElementById("brass"), document.getElementById("percussion"), document.getElementById("choir")];
+
+function clearSections(){ 
+    sections.forEach(s=>s.classList.remove("active"));
+    sections.forEach(s=>s.style.color="white");
+}
+
+function play(){ audio.play(); }
+function pause(){ audio.pause(); }
+function restart(){ audio.currentTime=0; audio.play(); }
+function jump(t){ audio.currentTime=t; audio.play(); }
+
+audio.addEventListener("timeupdate", ()=>{
+    let t=audio.currentTime;
+    let barWidth=document.getElementById("bar").clientWidth;
+    if(audio.duration){ progress.style.left=(t/audio.duration*barWidth)+"px"; }
+
+    clearSections();
+
+    // المرحلة الأولى: Code
+    if(t<90){ 
+        sections.forEach(s=>{ s.classList.add("active"); s.style.color="#00ffff"; });
+    }
+    // المرحلة الثانية: Coherence
+    else if(t<180){ 
+        sections.forEach(s=>{ s.classList.add("active"); s.style.color="#a0ff00"; });
+    }
+    // المرحلة الثالثة: Conscious Collaboration
+    else{ 
+        sections.forEach(s=>{ s.classList.add("active"); s.style.color="#ff8800"; });
+    }
+});
+
+// ECG Wave Animation
+const canvas = document.getElementById("ecg");
+const ctx = canvas.getContext("2d");
+let width = canvas.width;
+let height = canvas.height;
+let x = 0;
+let points = [];
+
+function generateECG(){
+    points = [];
+    for(let i=0; i<width; i++){
+        let y = height/2 + Math.sin(i*0.05)*15;
+        if(i%50===0) y -= 30;
+        points.push(y);
+    }
+}
+generateECG();
+
+function drawECG(){
+    ctx.clearRect(0,0,width,height);
+    ctx.beginPath();
+    ctx.moveTo(0, points[0]);
+    for(let i=1; i<points.length; i++){
+        ctx.lineTo(i, points[(i+x)%points.length]);
+    }
+    ctx.strokeStyle = "#ff4444";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    x+=2;
+    requestAnimationFrame(drawECG);
+}
+drawECG();
+</script>
+
+</body>
+</html>
+

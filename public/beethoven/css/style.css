@@ -1,0 +1,4 @@
+body { font-family: Arial, sans-serif; direction: ltr; }
+.movement { margin: 20px; }
+.timeline { position: relative; height: 50px; border: 1px solid #ccc; }
+.bar { position: absolute; width: 25%; height: 100%; cursor: pointer; background: #444; color: white; text-align:center; line-height:50px;}
