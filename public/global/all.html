@@ -153,29 +153,57 @@ document.querySelectorAll('.domain').forEach(button => {
   button.addEventListener('click', () => {
     const box = document.getElementById('detail');
     box.innerHTML = '';
+
     const title = document.createElement('h3');
-    title.textContent = button.dataset.name;
+    title.textContent = button.textContent.trim();
+
     const description = document.createElement('p');
     description.textContent = button.dataset.info;
+
     box.append(title, description);
 
     const links = [
       ['Explore BDIP document', './diag.pdf'],
       ['Global Web of Life', './doc.pdf']
     ];
-    if (button.dataset.name.includes('Knowledge')) {
+
+    const domainPDFs = {
+      'Learning & Education': '01_learning.pdf',
+      'Research & Innovation': '02_research.pdf',
+      'Data Science & Analytics': '03_data_science.pdf',
+      'Artificial Intelligence': '04_ai_hub.pdf',
+      'Knowledge Management': '05_knowledge.pdf',
+      'Digital Applications': '06_applications.pdf',
+      'Health Tourism': '07_health_tourism.pdf',
+      'One Health': '08_one_health.pdf',
+      'Governance & Sustainability': '09_governance.pdf'
+    };
+
+    const selectedDomain = button.dataset.name;
+    const pdfFile = domainPDFs[selectedDomain];
+
+    if (pdfFile) {
+      links.push([
+        '📄 Read Full Description (PDF)',
+        './' + pdfFile
+      ]);
+    }
+
+    if (selectedDomain === 'Knowledge Management') {
       links.push(['Cosmic Information', './cosmoinf.pdf']);
       links.push(['Divine Names and the Cosmos', './paper1.pdf']);
     }
+
     links.forEach(([label, url]) => {
       const a = document.createElement('a');
       a.href = url;
       a.textContent = label;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
       box.appendChild(a);
     });
   });
 });
 </script>
-
 </body>
 </html>
