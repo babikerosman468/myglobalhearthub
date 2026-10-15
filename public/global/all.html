@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Global Knowledge Vision</title>
+
+<style>
+body {
+    font-family: Georgia, serif;
+    background: #f4f6f9;
+    color: #263238;
+    margin: 0;
+    padding: 24px;
+}
+header {
+    text-align: center;
+    background: #800000;
+    color: white;
+    padding: 28px 15px;
+    border-radius: 12px;
+}
+h1 { margin: 0; }
+.subtitle { color: #f5d6a5; }
+main {
+    max-width: 800px;
+    margin: 30px auto;
+}
+.card {
+    background: white;
+    margin: 18px 0;
+    padding: 22px;
+    border-left: 6px solid #4682B4;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000012;
+}
+a {
+    color: #800000;
+    text-decoration: none;
+    font-size: 1.15em;
+    font-weight: bold;
+}
+a:hover { color: #4682B4; }
+.filename {
+    margin-top: 10px;
+    color: #607d8b;
+    font-family: monospace;
+}
+.arabic {
+    direction: rtl;
+    text-align: right;
+    font-size: 1.4em;
+}
+footer {
+    text-align: center;
+    margin-top: 35px;
+    color: #607d8b;
+}
+
+#bdip {max-width:1000px;margin:30px auto;text-align:center}
+#bdip h2 {color:#800000}
+.hub {display:inline-block;background:#800000;color:white;padding:18px 35px;
+border-radius:50px;font-size:1.5em;font-weight:bold}
+.domains {display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+gap:12px;margin:20px 0}
+.domain {border:2px solid #4682B4;border-radius:12px;padding:16px 8px;
+background:white;color:#800000;font-weight:bold;font-size:1em;cursor:pointer}
+.domain:hover,.domain:focus {background:#800000;color:white}
+#detail {background:white;border-left:6px solid #DAA520;border-radius:10px;
+padding:20px;margin:20px 0;text-align:left;min-height:80px}
+#detail a {display:inline-block;margin:8px}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Global Knowledge Vision</h1>
+<p class="subtitle">Science • Knowledge • Life • Human Connection</p>
+</header>
+
+<section id="bdip">
+<h2>BABS Digital Innovations &amp; Learning Platform</h2>
+<p>Explore the interconnected domains of the global knowledge ecosystem.</p>
+<div class="hub">BDIP · Knowledge Hub</div>
+<div class="domains">
+<button class="domain" data-name="Learning &amp; Education"
+data-info="Learning resources, digital education, teaching and lifelong learning.">🎓 Learning</button>
+<button class="domain" data-name="Research &amp; Innovation"
+data-info="Scientific discovery, interdisciplinary research and innovation.">🔬 Research</button>
+<button class="domain" data-name="Data Science &amp; Analytics"
+data-info="Data integration, statistical analysis, modelling and evidence-based decisions.">📊 Data Science</button>
+<button class="domain" data-name="Artificial Intelligence"
+data-info="AI, intelligent systems, computational methods and digital technologies.">🤖 AI Hub</button>
+<button class="domain" data-name="Knowledge Management"
+data-info="Organising, connecting and sharing scientific and human knowledge.">🌐 Knowledge</button>
+<button class="domain" data-name="Digital Applications"
+data-info="Interactive platforms, digital services and practical applications.">💻 Applications</button>
+<button class="domain" data-name="Health Tourism"
+data-info="Connecting healthcare, tourism, hospitality, research and digital services.">🏥 Health Tourism</button>
+<button class="domain" data-name="One Health"
+data-info="Integrating human, animal and environmental health.">🌱 One Health</button>
+<button class="domain" data-name="Governance &amp; Sustainability"
+data-info="Security, ethical governance, collaboration and sustainable development.">🛡️ Governance</button>
+</div>
+<div id="detail" aria-live="polite">
+<h3>Welcome to BDIP</h3>
+<p>Select any domain to explore its role in the ecosystem.</p>
+</div>
+</section>
+
+<main>
+
+    <div class="card">
+        <a href="./cosmoinf.pdf" class="arabic">
+            الكون المعلوماتي
+        </a>
+        <div class="filename">cosmoinf.pdf</div>
+    </div>
+
+    <div class="card">
+        <a href="./paper1.pdf" class="arabic">
+            ﺄﺴﻣﺍﺀ ﺎﻠﻠﻫ ﺎﻠﺤﺴﻧﻯ ﺎﻠﻣﺎﺴﻛﺓ ﻞﻠﻛﻮﻧ
+        </a>
+        <div class="filename">paper1.pdf</div>
+    </div>
+
+    <div class="card">
+        <a href="./doc.pdf">
+            The Global Web of Life and Human Connection
+        </a>
+        <div class="filename">doc.pdf</div>
+    </div>
+
+    <div class="card">
+        <a href="./diag.pdf">
+            BABS Digital Innovations &amp; Learning Platform (BDIP):
+            A General-Purpose Digital Knowledge Ecosystem
+        </a>
+        <div class="filename">diag.pdf</div>
+    </div>
+
+</main>
+
+<footer>
+    <p>Global Knowledge • Science • Humanity</p>
+</footer>
+
+
+<script>
+document.querySelectorAll('.domain').forEach(button => {
+  button.addEventListener('click', () => {
+    const box = document.getElementById('detail');
+    box.innerHTML = '';
+    const title = document.createElement('h3');
+    title.textContent = button.dataset.name;
+    const description = document.createElement('p');
+    description.textContent = button.dataset.info;
+    box.append(title, description);
+
+    const links = [
+      ['Explore BDIP document', './diag.pdf'],
+      ['Global Web of Life', './doc.pdf']
+    ];
+    if (button.dataset.name.includes('Knowledge')) {
+      links.push(['Cosmic Information', './cosmoinf.pdf']);
+      links.push(['Divine Names and the Cosmos', './paper1.pdf']);
+    }
+    links.forEach(([label, url]) => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.textContent = label;
+      box.appendChild(a);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
